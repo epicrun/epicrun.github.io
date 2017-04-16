@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="style.css"/>
+		<title>flappy cool</title>
+		<meta content='width=device-width, initial-scale=0.7, maximum-scale=0.7, user-scalable=0' name='viewport'/>
+	</head>
+	<body>
+		<div onmousedown="return false">
+			<div id="touchOverlay" onclick="Jump()" style="width:100%;height:100%;z-index:999999;position:fixed;cursor:pointer"></div>
+		</div>
+		<div id="score" style="position:relative;top:9vw;width:100%;color:white;text-align:center;font-size:100px;opacity:0;transition:1s"></div>
+		
+		<div id="tutorial" style="position:relative;top:5vw;width:100%;color:white;text-align:center;font-size:100px;opacity:0;transition:3s">Click or space to start</div>
+		
+		<div style="position:fixed;top:11px;left:10px;color:white;text-align:center;opacity:0.5">Highscore</div>
+		<div id="highscore" style="position:fixed;width:90px;top:30px;left:10px;color:white;text-align:center;font-size:50px;opacity:0.5"></div>
+		
+		<div id="player" style="left:75px;opacity:0">
+			<div id="jump1" style="position:relative;left:-5.1px;top:-70px;width:13px;height:13px;background-image:url('jump.png');background-size: 100% 100%;opacity:1;transition:0.5s"></div>
+			<div id="jump2" style="position:relative;left:-5.1px;top:-95px;width:13px;height:13px;background-image:url('jump.png');background-size: 100% 100%;opacity:1;transition:0.5s"></div>
+		</div>
+		<div id="background" style="top:0px;display:fixed"></div>
+		<div id="blocks"></div>
+	</body>
+	<script type="text/javascript" src="mobile.js"></script>
+</html>
