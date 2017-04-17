@@ -500,7 +500,7 @@ window.setInterval(function(){
 			document.getElementById("shop2").innerHTML="red player<br>purchased";
 		}
 		if(minionPurchased == true){
-			document.getElementById("background").style.backgroundImage="url('minion.png')";
+			document.getElementById("background").style.backgroundImage="url('dancingminion.gif')";
 			document.getElementById("shop1").innerHTML="minion background<br>purchased";
 		}
 		
