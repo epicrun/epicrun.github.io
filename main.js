@@ -394,9 +394,9 @@ function OpenGames(){
 		document.getElementById("closeGames").style.pointerEvents = "auto";
 		opened = true;
 	} else {
-		document.getElementById("game1").style.left="-2vw";
+		document.getElementById("game1").style.left="-200px";
 		document.getElementById("game1").style.opacity=0;
-		document.getElementById("game2").style.right="-2vw";
+		document.getElementById("game2").style.right="-200px";
 		document.getElementById("game2").style.opacity=0;
 		document.getElementById("closeGames").style.opacity = 0;
 		document.getElementById("closeGames").style.transitionDelay = "0s";

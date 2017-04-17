@@ -8,15 +8,6 @@ body {
 	zoom: reset;
 }
 
-#title {
-    position: relative;
-	text-align: center;
-	color: fuchsia;
-	font-size: 3vw;
-	top: -900px;
-	-webkit-animation: jump 0.75s cubic-bezier(0.215, 0.61, 0.355, 1);
-}
-
 #background {
 	position:fixed;
 	background-size: 3% 3%;
@@ -90,13 +81,4 @@ body {
 	width: 73px;
 	border-style: solid;
 	border-width: 2px;
-}
-
-@-webkit-keyframes jump {
-	0% {
-		transform: translateY(-100px);
-	}
-	100% {
-		transform: translateY(0px);
-	}
 }
