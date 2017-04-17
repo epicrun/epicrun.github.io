@@ -73,6 +73,7 @@ function renderStart(){
 	y.style.width=parseInt(leftAmt/75)+7.5*75 + "px";
 	y.style.borderColor="white";
 	y.style.opacity=0;
+	y.style.backgroundColor="black";
 	y.style.zIndex=2;
 	y.className="block";
 	y.id="startBlock";
@@ -436,7 +437,7 @@ window.setInterval(function(){
 			Respawn();
 		}
 		
-		if(positionX >= 500 && respawning == false || passes > 0){
+		if(positionX >= 500 && respawning == false || passes > 0 && respawning == false){
 			score = currentBlock-leftAmt/75;
 			score = parseInt(score/7);
 			score = passes * 5 + score;
@@ -499,14 +500,16 @@ window.setInterval(function(){
 			document.getElementById("shop2").innerHTML="red player<br>purchased";
 		}
 		if(minionPurchased == true){
-			document.getElementById("background").style.backgroundImage="url('dancingminion.gif')";
+			document.getElementById("background").style.backgroundImage="url('minion.png')";
 			document.getElementById("shop1").innerHTML="minion background<br>purchased";
 		}
 		
 	} else {
 		document.title = "New Tab";
+		
 		document.getElementById("coins").innerHTML = coins;
 		document.getElementById("shopCoinsText").innerHTML = coins;
+		
 		if(redplayerPurchased == true){
 			document.getElementById("player").style.backgroundColor="red";
 			document.getElementById("shop2").innerHTML="red player<br>purchased";
@@ -734,7 +737,7 @@ document.body.onkeydown = function(e){
 			Jump();
 		}
     }
-	//space
+	//escape
     if(e.keyCode == 27){
 		if(paused == false){
 			paused = true;
