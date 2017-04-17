@@ -290,7 +290,7 @@ window.setInterval(function(){
 			levelColour = "white";
 			document.getElementById("background").style.backgroundColor="black";
 		} else if(score >= 5 && score < 10){
-			levelColour = "green";
+			levelColour = "#02e633";
 			document.getElementById("background").style.backgroundColor=levelColour;
 		} else if(score >= 10 && score < 15){
 			levelColour = "yellow";
