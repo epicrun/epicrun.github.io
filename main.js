@@ -396,7 +396,7 @@ window.setInterval(function(){
 				coinsOnLevel++;
 				coinBlock = currentBlock;
 				
-				if(positionY >= 515 && positionY <= 625){
+				if(positionY >= topAmt-235 && positionY <= topAmt-125){
 					
 					var coinSound = new Audio('ding.wav');
 					coinSound.play();
@@ -418,7 +418,7 @@ window.setInterval(function(){
 				coinsOnLevel2++;
 				coinBlock2 = currentBlock;
 				
-				if(positionY >= 595 && positionY <= 705){
+				if(positionY >= topAmt-155 && positionY <= topAmt-45){
 					
 					var coinSound = new Audio('ding.wav');
 					coinSound.play();
@@ -500,7 +500,7 @@ window.setInterval(function(){
 		}
 		if(minionPurchased == true){
 			document.getElementById("background").style.backgroundImage="url('dancingminion.gif')";
-			document.getElementById("shop").innerHTML="minion background<br>purchased";
+			document.getElementById("shop1").innerHTML="minion background<br>purchased";
 		}
 		
 	} else {
@@ -513,7 +513,7 @@ window.setInterval(function(){
 		}
 		if(minionPurchased == true){
 			document.getElementById("background").style.backgroundImage="url('dancingminion.gif')";
-			document.getElementById("shop").innerHTML="minion background<br>purchased";
+			document.getElementById("shop1").innerHTML="minion background<br>purchased";
 		}
 	}
 }, 5);
