@@ -36,7 +36,10 @@ var deleted = false;
 function SetPosition(){
 	var ratio = window.innerWidth / window.innerHeight;
 	leftAmt = ratio/0.005;
+	topAmt = parseInt(window.innerHeight*0.789);
+	console.log(topAmt);
 	document.getElementById("player").style.left=ratio/0.005 + "px";
+	positionY = topAmt-200;
 	
 	//if the game hasnt started move the starting block to match the players position
 	if(started == false){
@@ -66,7 +69,7 @@ renderLevel();
 function renderStart(){
 	var y = document.createElement("div");
 	y.style.left=leftAmt + "px";
-	y.style.top=750 + "px";
+	y.style.top=topAmt + "px";
 	y.style.width=parseInt(leftAmt/75)+7.5*75 + "px";
 	y.style.borderColor="white";
 	y.style.opacity=0;
@@ -143,7 +146,7 @@ function renderLevel(){
 		if(level[i] == 1){
 			var y = document.createElement("div");
 			y.style.left=75*[i]+"px";
-			y.style.top=750 + "px";
+			y.style.top=topAmt + "px";
 			y.style.opacity=0;
 			y.className="block";
 			var blocks = document.getElementById("blocks");
@@ -155,7 +158,7 @@ function renderLevel(){
 		if(level2[i] == 1){
 			var y = document.createElement("div");
 			y.style.left=75*[i]+"px";
-			y.style.top=700 + "px";
+			y.style.top=topAmt-50 + "px";
 			y.style.opacity=0;
 			y.className="block";
 			var blocks = document.getElementById("blocks");
@@ -167,7 +170,7 @@ function renderLevel(){
 		if(level3[i] == 1){
 			var y = document.createElement("div");
 			y.style.left=75*[i]+"px";
-			y.style.top=650 + "px";
+			y.style.top=topAmt-100 + "px";
 			y.style.opacity=0;
 			y.className="block";
 			var blocks = document.getElementById("blocks");
@@ -179,7 +182,7 @@ function renderLevel(){
 		if(portal[i] == 1){
 			var y = document.createElement("div");
 			y.style.left=75*[i]+50+"px";
-			y.style.top=550 + "px";
+			y.style.top=topAmt-200 + "px";
 			y.style.opacity=0;
 			y.style.backgroundImage="url('portal.png')";
 			y.style.backgroundSize="100% 100%";
@@ -196,10 +199,11 @@ function renderLevel(){
 		if(coinlevel[i] == 1){
 			var y = document.createElement("div");
 			y.style.left=75*[i]+"px";
-			y.style.top=550 + "px";
+			y.style.top=topAmt-200 + "px";
 			y.style.opacity=0;
 			y.style.backgroundImage="url('coin.png')";
 			y.style.backgroundSize="100% 100%";
+			y.style.borderWidth="0px";
 			y.style.zIndex=-1;
 			y.style.width="75px";
 			y.style.height="75px";
@@ -370,7 +374,7 @@ window.setInterval(function(){
 		}
 
 		var currentBlock = parseInt(positionX/75+leftAmt/75);
-		if(level[currentBlock] == 1 && positionY >= 700 && positionY <= 710 && gravity >= 0 || level2[currentBlock] == 1 && positionY >= 650 && positionY <= 660 && gravity >= 0 || level3[currentBlock] == 1 && positionY >= 600 && positionY <= 610 && gravity >= 0){
+		if(level[currentBlock] == 1 && positionY >= topAmt-50 && positionY <= topAmt-40 && gravity >= 0 || level2[currentBlock] == 1 && positionY >= topAmt-100 && positionY <= topAmt-90 && gravity >= 0 || level3[currentBlock] == 1 && positionY >= topAmt-150 && positionY <= topAmt-140 && gravity >= 0){
 			grounded = true;
 			gravity = 1.1;
 		} else {
@@ -564,7 +568,7 @@ function Respawn(){
 		if(document.getElementById("player").style.opacity < 1){
 			document.getElementById("player").style.opacity=parseFloat(document.getElementById("player").style.opacity) + 0.05/5;
 		}
-		positionY = 500;
+		positionY = topAmt-200;
 		jumps = 2;
 		passes = 0;
 		positionX = 0;
