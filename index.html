@@ -1,26 +1,42 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="style.css"/>
-		<title>flappy cool</title>
+		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+		<link rel="icon" type="image/png" href="icon.png">
+		<title>epic run</title>
 		<meta content='width=device-width, initial-scale=0.7, maximum-scale=0.7, user-scalable=0' name='viewport'/>
 	</head>
 	<body>
 		<div onmousedown="return false">
-			<div id="touchOverlay" onclick="Jump()" style="width:100%;height:100%;z-index:999999;position:fixed;cursor:pointer"></div>
+			<div id="touchOverlay" onclick="Jump()" style="width:100%;height:100%;z-index:9999;position:fixed;cursor:pointer"></div>
+			<div id="openGames" onclick="OpenGames();Pause();" style="opacity:0">more games</div>
+			
+			<a href="http://nutsimulator.github.io" target="_blank">
+				<div class="gameLink" id="game1" style="left:-2vw;opacity: 0">nut simulator</div>
+			</a>
+			
+			<div id="closeGames" onclick="OpenGames()" style="opacity:0;transition-delay:0.3s;pointer-events:none">close</div>
+			
+			<a href="http://flappycool.github.io" target="_blank">
+				<div class="gameLink" id="game2" style="right:-2vw;opacity: 0">flappy cool</div>
+			</a>
 		</div>
 		<div id="score" style="position:relative;top:9vw;width:100%;color:white;text-align:center;font-size:100px;opacity:0;transition:1s"></div>
 		
-		<div id="tutorial" style="position:relative;top:5vw;width:100%;color:white;text-align:center;font-size:100px;opacity:0;transition:3s">Click or space to start</div>
+		<div id="tutorial" style="position:relative;top:5vw;width:100%;color:white;text-align:center;font-size:100px;opacity:0;transition:2s">Click or space to start</div>
 		
-		<div style="position:fixed;top:11px;left:10px;color:white;text-align:center;opacity:0.5">Highscore</div>
-		<div id="highscore" style="position:fixed;width:90px;top:30px;left:10px;color:white;text-align:center;font-size:50px;opacity:0.5"></div>
+		<div id="highscoreText" style="position:fixed;top:11px;left:10px;color:white;text-align:center;opacity:0;transition:3s">Highscore</div>
+		<div id="highscore" style="position:fixed;width:92px;top:30px;left:10px;color:white;text-align:center;font-size:50px;opacity:0;transition:3s"></div>
 		
 		<div id="player" style="left:900px;opacity:0">
 			<div id="jump1" style="position:relative;left:-5.1px;top:-70px;width:13px;height:13px;background-image:url('jump.png');background-size: 100% 100%;opacity:1;transition:0.5s"></div>
 			<div id="jump2" style="position:relative;left:-5.1px;top:-95px;width:13px;height:13px;background-image:url('jump.png');background-size: 100% 100%;opacity:1;transition:0.5s"></div>
 		</div>
-		<div id="background" style="top:0px;display:fixed"></div>
+		<div id="background" style="background-color:black"></div>
 		<div id="blocks"></div>
+		<div id="title" style="position:relative;top:-25%;width:100%;color:white;text-align:center;font-size:60px;opacity:0;transition:2s">epic run</div>
+		<div id="paused" style="position:fixed;top:50%;left:50%;-webkit-transform:translate(-50%,-50%);color:white;text-align:center;font-size:200px;opacity:0;transition:1s;z-index:99999999;pointer-events:none">PAUSED</div>
+		<div id="overlay" style="position:fixed;top:0;left:0;background-color:black;opacity:0;z-index:9999999;width:100%;height:100%;transition:1s;pointer-events:none"></div>
 	</body>
 	<script type="text/javascript" src="main.js"></script>
 </html>
