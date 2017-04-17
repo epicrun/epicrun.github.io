@@ -9,36 +9,47 @@
 	<body>
 		<div onmousedown="return false">
 			<div id="touchOverlay" onclick="Jump()" style="width:100%;height:100%;z-index:9999;position:fixed;cursor:pointer"></div>
-			<div id="openGames" onclick="OpenGames();Pause();" style="opacity:0">more games</div>
+			<div id="openGames" onclick="OpenGames();Pause()" style="opacity:0;transition:3s;z-index:99999999">more games</div>
+			
+			<div id="shopButton" onclick="OpenShop();Pause()" style="opacity:0;transition:3s;z-index:99999999">open shop</div>
+			<div id="shop1" class="shop" onclick="Buy('minion')" style="opacity:0;top:-100px;z-index:99999999;pointer-events:none">minion gif background<br>100 coins</div>
+			<div id="shop2" class="shop" onclick="Buy('redplayer')" style="opacity:0;top:100px;z-index:99999999;pointer-events:none">red player<br>25 coins</div>
+			<div id="shopCoins" onclick="Buy('redplayer')" style="opacity:0;top:150px;z-index:99999999;pointer-events:none"><span>coins<br><span id="shopCoinsText" style="font-size:40px">0</span></span></div>
+			<div id="shopClose" onclick="OpenShop();Pause()" style="opacity:0;top:300px;z-index:99999999;pointer-events:none">close</div>
+			
+			<div id="deleteSave" onclick="DeleteSave()" style="opacity:1;z-index:99999999;font-size:15px">delete save</div>
 			
 			<a href="http://nutsimulator.github.io" target="_blank">
 				<div class="gameLink" id="game1" style="left:-200px;opacity: 0">nut simulator</div>
 			</a>
 			
-			<div id="closeGames" onclick="OpenGames()" style="opacity:0;transition-delay:0.3s;pointer-events:none">close</div>
+			<div id="closeGames" onclick="OpenGames();Pause();" style="opacity:0;transition-delay:0.3s;pointer-events:none">close</div>
 			
 			<a href="http://flappycool.github.io" target="_blank">
 				<div class="gameLink" id="game2" style="right:-200px;opacity: 0">flappy cool</div>
 			</a>
 		</div>
-		<div id="score" style="position:relative;top:9vw;width:100%;color:white;text-align:center;font-size:100px;opacity:0;transition:1s"></div>
+		<div id="score" style="position:relative;top:20%;width:100%;color:white;text-align:center;font-size:100px;opacity:0;transition:1s"></div>
 		
-		<div id="tutorial" style="position:relative;top:5vw;width:100%;color:white;text-align:center;font-size:100px;opacity:0;transition:2s">Click or space to start</div>
+		<div id="tutorial" style="position:relative;top:20%;width:100%;color:white;text-align:center;font-size:100px;opacity:0;transition:2s">Click or space to start</div>
 		
 		<div id="highscoreText" style="position:fixed;top:11px;left:10px;color:white;text-align:center;opacity:0;transition:3s">Highscore</div>
 		<div id="highscore" style="position:fixed;width:92px;top:30px;left:10px;color:white;text-align:center;font-size:50px;opacity:0;transition:3s"></div>
 		
-		<div id="player" style="left:900px;opacity:0">
+		<div id="coinsText" style="position:fixed;top:11px;left:130px;color:white;text-align:center;opacity:0;transition:3s">Coins</div>
+		<div id="coins" style="position:fixed;width:53px;top:30px;left:130px;color:white;text-align:center;font-size:50px;opacity:0;transition:3s"></div>
+		
+		<div id="player" style="left:900px;opacity:0;background-color: white">
 			<div id="jump1" style="position:relative;left:-5.1px;top:-70px;width:13px;height:13px;background-image:url('jump.png');background-size: 100% 100%;opacity:1;transition:0.5s"></div>
 			<div id="jump2" style="position:relative;left:-5.1px;top:-95px;width:13px;height:13px;background-image:url('jump.png');background-size: 100% 100%;opacity:1;transition:0.5s"></div>
 		</div>
 		<div id="background" style="background-color:black"></div>
 		<div id="blocks"></div>
 		
-		<div id="title" style="position:fixed;top:5%;left:50%;-webkit-transform:translate(-50%,-50%);color:white;font-size:50px;opacity:0;transition:2s">epic run</div>
+		<!--<div id="title" style="position:fixed;top:5%;left:50%;-webkit-transform:translate(-50%,-50%);color:white;font-size:50px;opacity:0;transition:2s">epic run</div>!-->
 		
-		<div id="paused" style="position:fixed;top:50%;left:50%;-webkit-transform:translate(-50%,-50%);color:white;text-align:center;font-size:200px;opacity:0;transition:1s;z-index:99999999;pointer-events:none">PAUSED</div>
-		<div id="overlay" style="position:fixed;top:0;left:0;background-color:black;opacity:0;z-index:9999999;width:100%;height:100%;transition:1s;pointer-events:none"></div>
+		<div id="paused" style="position:fixed;top:50%;left:50%;-webkit-transform:translate(-50%,-50%);color:white;text-align:center;font-size:10vw;opacity:0;transition:1s;z-index:99999999;pointer-events:none">PAUSED</div>
+		<div id="overlay" style="position:fixed;top:0;left:0;background-color:black;opacity:0;z-index:9999999;width:100%;height:100%;transition:0.5s;pointer-events:none"></div>
 	</body>
 	<script type="text/javascript" src="main.js"></script>
 </html>
