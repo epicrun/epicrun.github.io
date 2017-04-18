@@ -31,6 +31,11 @@ var coinBlock = 0;
 var coinBlock2 = 0;
 var shopOpened = false;
 var deleted = false;
+var thisLoop;
+var fps;
+var lastLoop;
+var redplayerEquipped = true;
+var minionEquipped = true;
 
 //moves player and collision to fit window
 function SetPosition(){
@@ -239,8 +244,8 @@ function renderLevel(){
 function Jump(){
 	started = true;
 	if(paused == false){
-		if(jumps >= 1 && respawning == false){
-			gravity = -1;
+		if(jumps >= 1 && respawning == false){	
+			gravity = -5;
 			jumpPosition = positionY - 140;
 			jumping = true;
 			grounded = false;
@@ -259,13 +264,17 @@ setTimeout(function (){
 		document.getElementById("shopButton").style.transition = "0.5s";
 		document.getElementById("openGames").style.transition = "0.5s";
 }, 120);
-	
-window.setInterval(function(){
+
+
+lastLoop = new Date;
+function Repeat(){
 	if(paused == false){
 		document.title = "epic run | score: " + score;
 		//fade in start
 		if(document.getElementById("startBlock") != null){
-			document.getElementById("startBlock").style.opacity = parseFloat(document.getElementById("startBlock").style.opacity) + 0.05/5;
+			if(document.getElementById("startBlock").style.opacity < 1){
+				document.getElementById("startBlock").style.opacity = 1;
+			}
 		}
 		if(document.getElementById("player").style.opacity < 1){
 			document.getElementById("player").style.opacity = parseFloat(document.getElementById("player").style.opacity) + 0.05/5;
@@ -280,27 +289,25 @@ window.setInterval(function(){
 		document.getElementById("shopButton").style.opacity = 0.8;
 		
 		if(started == true){
-			positionX += 1.5;
+			positionX += 5;
 			document.getElementById("tutorial").style.opacity = 0;
 				
 			for(var i=0;i<document.getElementsByClassName("block").length;i++){
 				var selectedBlock = document.getElementsByClassName("block")[i];
 				selectedBlock.style.borderColor=levelColour;
 				var leftFloat = parseFloat(selectedBlock.style.left, 10);
-				selectedBlock.style.left=leftFloat - 1.5 + "px";
-				
-				if (leftFloat < leftAmt-20){
-						selectedBlock.style.opacity = parseFloat(selectedBlock.style.opacity) - 0.01/5;
-				}
+				selectedBlock.style.left=leftFloat - 5 + "px";
 					
 				//opacity changes for blocks
 				if(respawning == false){
 					if (leftFloat <= leftAmt+20 && leftFloat >= leftAmt-20){	
-						selectedBlock.style.opacity = parseFloat(selectedBlock.style.opacity) + 0.1/5;
+						if(selectedBlock.style.opacity < 1){
+							selectedBlock.style.opacity = parseFloat(selectedBlock.style.opacity) + 0.1;
+						}
 					} else if (leftFloat < leftAmt-20){
-						selectedBlock.style.opacity = parseFloat(selectedBlock.style.opacity) - 0.01/5;
+						selectedBlock.style.opacity = parseFloat(selectedBlock.style.opacity) - 0.012;
 					} else if (leftFloat > leftAmt+20 && leftFloat < leftAmt*3.5+500){
-						selectedBlock.style.opacity = parseFloat(selectedBlock.style.opacity) + 0.003/5;
+						selectedBlock.style.opacity = parseFloat(selectedBlock.style.opacity) + 0.002;
 					}
 				}
 				
@@ -314,20 +321,18 @@ window.setInterval(function(){
 				var selectedBlock = document.getElementsByClassName("coin")[i];
 				selectedBlock.style.borderColor=levelColour;
 				var leftFloat = parseFloat(selectedBlock.style.left, 10);
-				selectedBlock.style.left=leftFloat - 1.5 + "px";
+				selectedBlock.style.left=leftFloat - 5 + "px";
 				
-				if (leftFloat < leftAmt-20){
-						selectedBlock.style.opacity = parseFloat(selectedBlock.style.opacity) - 0.01/5;
-				}
-					
 				//opacity changes for blocks
 				if(respawning == false){
 					if (leftFloat <= leftAmt+20 && leftFloat >= leftAmt-20){	
-						selectedBlock.style.opacity = parseFloat(selectedBlock.style.opacity) + 0.1/5;
+						if(selectedBlock.style.opacity < 1){
+							selectedBlock.style.opacity = parseFloat(selectedBlock.style.opacity) + 0.1;
+						}
 					} else if (leftFloat < leftAmt-20){
-						selectedBlock.style.opacity = parseFloat(selectedBlock.style.opacity) - 0.01/5;
+						selectedBlock.style.opacity = parseFloat(selectedBlock.style.opacity) - 0.012;
 					} else if (leftFloat > leftAmt+20 && leftFloat < leftAmt*3.5+500){
-						selectedBlock.style.opacity = parseFloat(selectedBlock.style.opacity) + 0.003/5;
+						selectedBlock.style.opacity = parseFloat(selectedBlock.style.opacity) + 0.002;
 					}
 				}
 			}
@@ -336,20 +341,18 @@ window.setInterval(function(){
 				var selectedBlock = document.getElementsByClassName("coin2")[i];
 				selectedBlock.style.borderColor=levelColour;
 				var leftFloat = parseFloat(selectedBlock.style.left, 10);
-				selectedBlock.style.left=leftFloat - 1.5 + "px";
+				selectedBlock.style.left=leftFloat - 5 + "px";
 				
-				if (leftFloat < leftAmt-20){
-						selectedBlock.style.opacity = parseFloat(selectedBlock.style.opacity) - 0.01/5;
-				}
-					
 				//opacity changes for blocks
 				if(respawning == false){
 					if (leftFloat <= leftAmt+20 && leftFloat >= leftAmt-20){	
-						selectedBlock.style.opacity = parseFloat(selectedBlock.style.opacity) + 0.1/5;
+						if(selectedBlock.style.opacity < 1){
+							selectedBlock.style.opacity = parseFloat(selectedBlock.style.opacity) + 0.1;
+						}
 					} else if (leftFloat < leftAmt-20){
-						selectedBlock.style.opacity = parseFloat(selectedBlock.style.opacity) - 0.01/5;
+						selectedBlock.style.opacity = parseFloat(selectedBlock.style.opacity) - 0.012;
 					} else if (leftFloat > leftAmt+20 && leftFloat < leftAmt*3.5+500){
-						selectedBlock.style.opacity = parseFloat(selectedBlock.style.opacity) + 0.003/5;
+						selectedBlock.style.opacity = parseFloat(selectedBlock.style.opacity) + 0.002;
 					}
 				}
 			}
@@ -357,7 +360,7 @@ window.setInterval(function(){
 		
 		if(jumping == true){
 			if(positionY > jumpPosition){
-				positionY = positionY - 1;
+				positionY = positionY - 1	;
 			} else {
 				jumping = false;
 			}
@@ -375,7 +378,7 @@ window.setInterval(function(){
 		}
 
 		var currentBlock = parseInt(positionX/75+leftAmt/75);
-		if(level[currentBlock] == 1 && positionY >= topAmt-50 && positionY <= topAmt-40 && gravity >= 0 || level2[currentBlock] == 1 && positionY >= topAmt-100 && positionY <= topAmt-90 && gravity >= 0 || level3[currentBlock] == 1 && positionY >= topAmt-150 && positionY <= topAmt-140 && gravity >= 0){
+		if(level[currentBlock] == 1 && positionY >= topAmt-50 && positionY <= topAmt-40 && gravity >= -2 || level2[currentBlock] == 1 && positionY >= topAmt-100 && positionY <= topAmt-90 && gravity >= -2 || level3[currentBlock] == 1 && positionY >= topAmt-150 && positionY <= topAmt-140 && gravity >= -2){
 			grounded = true;
 			gravity = 1.1;
 		} else {
@@ -383,7 +386,7 @@ window.setInterval(function(){
 		}
 		
 		if(grounded == false){
-			gravity += 0.02;
+			gravity += 0.18;
 			positionY = positionY + gravity;
 			positionY = Math.round(positionY * 100) / 100;
 			document.getElementById("player").style.top=positionY + "px";
@@ -442,7 +445,7 @@ window.setInterval(function(){
 			score = parseInt(score/7);
 			score = passes * 5 + score;
 			if(score > 0){
-				document.getElementById("score").style.opacity = 0.5;
+				document.getElementById("score").style.opacity = 0.8;
 			}
 		document.getElementById("score").innerHTML = score;
 		}
@@ -457,28 +460,28 @@ window.setInterval(function(){
 			document.getElementById("background").style.backgroundColor="black";
 		} else if(score >= 5 && score < 10){
 			levelColour = "#02e633";
-			document.getElementById("background").style.backgroundColor=levelColour;
+			document.getElementById("background").style.backgroundColor="#000C03";
 		} else if(score >= 10 && score < 15){
 			levelColour = "yellow";
-			document.getElementById("background").style.backgroundColor=levelColour;
+			document.getElementById("background").style.backgroundColor="#0D0D00";
 		} else if(score >= 15 && score < 20){
 			levelColour = "cyan";
-			document.getElementById("background").style.backgroundColor=levelColour;
+			document.getElementById("background").style.backgroundColor="#000d0d";
 		} else if(score >= 20 && score < 25){
 			levelColour = "blue";
-			document.getElementById("background").style.backgroundColor=levelColour;
+			document.getElementById("background").style.backgroundColor="#00030d";
 		} else if(score >= 25 && score < 30){
 			levelColour = "#9000ff";
-			document.getElementById("background").style.backgroundColor=levelColour;
+			document.getElementById("background").style.backgroundColor="#08000d";
 		} else if(score >= 30 && score < 35){
 			levelColour = "fuchsia";
-			document.getElementById("background").style.backgroundColor=levelColour;
+			document.getElementById("background").style.backgroundColor="#0d000d";
 		} else if(score >= 35 && score < 40){
 			levelColour = "orange";
-			document.getElementById("background").style.backgroundColor=levelColour;
+			document.getElementById("background").style.backgroundColor="#0d0600";
 		} else if(score >= 40 && score < 45){
 			levelColour = "red";
-			document.getElementById("background").style.backgroundColor=levelColour;
+			document.getElementById("background").style.backgroundColor="#0d0000";
 		}
 		
 		
@@ -495,36 +498,62 @@ window.setInterval(function(){
 		
 		document.getElementById("coins").innerHTML = coins;
 		document.getElementById("shopCoinsText").innerHTML = coins;
-		if(redplayerPurchased == true){
-			document.getElementById("player").style.backgroundColor="red";
-			document.getElementById("shop2").innerHTML="red player<br>purchased";
-		}
-		if(minionPurchased == true){
-			document.getElementById("background").style.backgroundImage="url('dancingminion.gif')";
-			document.getElementById("shop1").innerHTML="minion background<br>purchased";
-		}
+		CheckPurchases();
 		
 	} else {
 		document.title = "New Tab";
 		
 		document.getElementById("coins").innerHTML = coins;
 		document.getElementById("shopCoinsText").innerHTML = coins;
-		
-		if(redplayerPurchased == true){
-			document.getElementById("player").style.backgroundColor="red";
-			document.getElementById("shop2").innerHTML="red player<br>purchased";
-		}
-		if(minionPurchased == true){
-			document.getElementById("background").style.backgroundImage="url('dancingminion.gif')";
-			document.getElementById("shop1").innerHTML="minion background<br>purchased";
+		CheckPurchases();
+	}
+thisLoop = new Date;
+fps = 1000/(thisLoop - lastLoop);
+fps = parseInt(fps);
+lastLoop = thisLoop;
+}
+
+function CheckPurchases(){
+	if(redplayerPurchased == true){
+		if(redplayerEquipped == true){
+		document.getElementById("player").style.backgroundColor="red";
+		document.getElementById("shop2").innerHTML="red player<br>purchased (click to disable)";
+		} else {
+			document.getElementById("player").style.backgroundColor="white";
+			document.getElementById("shop2").innerHTML="red player<br>purchased (click to enable)";
 		}
 	}
-}, 5);
+	if(minionPurchased == true){
+		if(minionEquipped == true){
+			document.getElementById("background").style.backgroundImage="url('dancingminion.gif')";
+			document.getElementById("shop1").innerHTML="minion background<br>purchased (click to disable)";
+		} else {
+			document.getElementById("background").style.backgroundImage="";
+			document.getElementById("shop1").innerHTML="minion background<br>purchased (click to enable)";
+		}
+	}
+}
+	
+setInterval( function () {
+
+	if(fps <= 100){
+		document.getElementById("fps").innerHTML=fps + " fps";
+	}
+
+}, 1000 / 5 );
+
+setInterval( function () {
+
+	requestAnimationFrame(Repeat);
+
+}, 1000 / 60 );
+requestAnimationFrame(Repeat);
 
 function GenerateMore(){
 		positionX = 0;
 		coinsOnLevel = 0;
 		coinsOnLevel2 = 0;
+		gravity = 0;
 		level =	[];
 		level2 = [];
 		level3 = [];
@@ -656,8 +685,14 @@ function Buy(item){
 			} else {
 				var cantBuy = new Audio('cantJump.wav');
 				cantBuy.play();
+				if(minionEquipped == true){
+					minionEquipped = false;
+				} else {
+					minionEquipped = true;
+				}
 			}
 		break;
+		
 		case "redplayer":
 			if(redplayerPurchased == false){
 				if(coins >= 25){
@@ -672,6 +707,11 @@ function Buy(item){
 			} else {
 				var cantBuy = new Audio('cantJump.wav');
 				cantBuy.play();
+				if(redplayerEquipped == true){
+					redplayerEquipped = false;
+				} else {
+					redplayerEquipped = true;
+				}
 			}
 		break;
 	}
