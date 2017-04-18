@@ -42,7 +42,6 @@ function SetPosition(){
 	var ratio = window.innerWidth / window.innerHeight;
 	leftAmt = ratio/0.005;
 	topAmt = parseInt(window.innerHeight*0.789);
-	console.log(topAmt);
 	document.getElementById("player").style.left=ratio/0.005 + "px";
 	positionY = topAmt-200;
 	
@@ -225,7 +224,7 @@ function renderLevel(){
 		if(coinlevel2[i] == 1){
 			var y = document.createElement("div");
 			y.style.left=75*[i]+"px";
-			y.style.top=640 + "px";
+			y.style.top=topAmt-110 + "px";
 			y.style.opacity=0;
 			y.style.backgroundImage="url('coin.png')";
 			y.style.backgroundSize="100% 100%";
@@ -404,12 +403,12 @@ function Repeat(){
 					
 					var coinSound = new Audio('ding.wav');
 					coinSound.play();
-					console.log("ye: " + positionY);
+					//console.log("ye: " + positionY);
 					coins++;
 					document.getElementsByClassName("coin")[coinsOnLevel-1].style.top="5555px";
 					
 				} else {
-					console.log("na: " + positionY);
+					//console.log("na: " + positionY);
 				}
 			}
 		}
@@ -426,17 +425,17 @@ function Repeat(){
 					
 					var coinSound = new Audio('ding.wav');
 					coinSound.play();
-					console.log("ye: " + positionY);
+					//console.log("ye: " + positionY);
 					coins++;
 					document.getElementsByClassName("coin2")[coinsOnLevel2-1].style.top="5555px";
 					
 				} else {
-					console.log("na: " + positionY);
+					//console.log("na: " + positionY);
 				}
 			}
 		}
 		
-		if(positionY >= 890 || positionY <= 10){
+		if(positionY >= topAmt+100 || positionY <= 10){
 			Respawn();
 		}
 		
@@ -498,7 +497,18 @@ function Repeat(){
 		
 		document.getElementById("coins").innerHTML = coins;
 		document.getElementById("shopCoinsText").innerHTML = coins;
+		
+		//checks if items have been bought and updates values
 		CheckPurchases();
+		
+		//if able to buy an item it shows a notification
+		if(minionPurchased == false && coins >= 100 || redplayerPurchased == false && coins >= 25){
+			document.getElementById("notification").style.opacity=0.8;
+			document.getElementById("notification").style.right="141px";
+		} else {
+			document.getElementById("notification").style.opacity=0;
+			document.getElementById("notification").style.right="80px";
+		}
 		
 	} else {
 		document.title = "New Tab";
@@ -507,10 +517,10 @@ function Repeat(){
 		document.getElementById("shopCoinsText").innerHTML = coins;
 		CheckPurchases();
 	}
-thisLoop = new Date;
-fps = 1000/(thisLoop - lastLoop);
-fps = parseInt(fps);
-lastLoop = thisLoop;
+	thisLoop = new Date;
+	fps = 1000/(thisLoop - lastLoop);
+	fps = parseInt(fps);
+	lastLoop = thisLoop;
 }
 
 function CheckPurchases(){
@@ -533,7 +543,8 @@ function CheckPurchases(){
 		}
 	}
 }
-	
+
+//fps
 setInterval( function () {
 
 	if(fps <= 100){
@@ -542,12 +553,12 @@ setInterval( function () {
 
 }, 1000 / 5 );
 
+//call frames every 1000/60 ms = 60fps
 setInterval( function () {
 
 	requestAnimationFrame(Repeat);
 
 }, 1000 / 60 );
-requestAnimationFrame(Repeat);
 
 function GenerateMore(){
 		positionX = 0;
@@ -671,28 +682,6 @@ var redplayerPurchased = false;
 var minionPurchased = false;
 function Buy(item){
 	switch (item){
-		case "minion":
-			if(minionPurchased == false){
-				if(coins >= 100){
-					coins -= 100;
-					minionPurchased = true;
-					var canBuy = new Audio('jump.wav');
-					canBuy.play();
-				} else {
-					var cantBuy = new Audio('cantJump.wav');
-					cantBuy.play();
-				}
-			} else {
-				var cantBuy = new Audio('cantJump.wav');
-				cantBuy.play();
-				if(minionEquipped == true){
-					minionEquipped = false;
-				} else {
-					minionEquipped = true;
-				}
-			}
-		break;
-		
 		case "redplayer":
 			if(redplayerPurchased == false){
 				if(coins >= 25){
@@ -705,12 +694,38 @@ function Buy(item){
 					cantBuy.play();
 				}
 			} else {
-				var cantBuy = new Audio('cantJump.wav');
-				cantBuy.play();
 				if(redplayerEquipped == true){
 					redplayerEquipped = false;
+					var unequip = new Audio('cantJump.wav');
+					unequip.play();
 				} else {
 					redplayerEquipped = true;
+					var equip = new Audio('jump.wav');
+					equip.play();
+				}
+			}
+		break;
+		
+		case "minion":
+			if(minionPurchased == false){
+				if(coins >= 100){
+					coins -= 100;
+					minionPurchased = true;
+					var canBuy = new Audio('jump.wav');
+					canBuy.play();
+				} else {
+					var cantBuy = new Audio('cantJump.wav');
+					cantBuy.play();
+				}
+			} else {
+				if(minionEquipped == true){
+					minionEquipped = false;
+					var unequip = new Audio('cantJump.wav');
+					unequip.play();
+				} else {
+					minionEquipped = true;
+					var equip = new Audio('jump.wav');
+					equip.play();
 				}
 			}
 		break;
@@ -722,7 +737,9 @@ function Save(){
 		'highscore': highscore,
 		'coins': coins,
 		'redplayerPurchased': redplayerPurchased,
-		'minionPurchased': minionPurchased
+		'minionPurchased': minionPurchased,
+		'redplayerEquipped': redplayerEquipped,
+		'minionEquipped': minionEquipped
 	}
 	localStorage.setItem("save",JSON.stringify(save));
 }
@@ -744,6 +761,8 @@ function Load(){
 		if (typeof savegame.coins !== "undefined") coins = savegame.coins;
 		if (typeof savegame.redplayerPurchased !== "undefined") redplayerPurchased = savegame.redplayerPurchased;
 		if (typeof savegame.minionPurchased !== "undefined") minionPurchased = savegame.minionPurchased;
+		if (typeof savegame.redplayerEquipped !== "undefined") redplayerEquipped = savegame.redplayerEquipped;
+		if (typeof savegame.minionEquipped !== "undefined") minionEquipped = savegame.minionEquipped;
 	}
 	document.getElementById("highscore").innerHTML = highscore;
 }
@@ -767,8 +786,6 @@ window.onbeforeunload = function(){
 		Save();
 	}
 }
-
-Load();
 
 document.body.onkeydown = function(e){
 	//space
@@ -811,3 +828,6 @@ document.body.onkeydown = function(e){
 		}
     }
 }
+
+Load();
+console.log("%cno CHEATING !!!","background: cyan;color:red;font-size:50px;font-family: 'Comic Sans MS',cursive,sans-serif");

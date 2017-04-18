@@ -53,7 +53,7 @@ body {
 	justify-content: center;
 	color:white;
 	text-align: center;
-	z-index:99999;
+	z-index:99999999;
 	border-style: solid;
 	border-color: white;
 	border-width: 2px;
@@ -74,11 +74,11 @@ body {
 
 #openGames {
 	top:20px;
-	right:1vw;
+	right:17px;
 	width:120px;
 	font-size:20px;
 	cursor: url('cursor.png'), auto;
-	padding: 10px 10px 10px 10px;
+	padding: 10px;
 }
 
 #openGames:hover {
@@ -119,12 +119,9 @@ body {
 #shopButton{
 	top:80px;
 	width:100px;
-	right:1vw;
-	padding: 10px 10px 10px 10px;
-}
-
-#shopButton:hover {
-	width:110px;
+	right:17px;
+	padding: 10px;
+	background-color:black;
 }
 
 #shop1,#shop2 {
@@ -146,12 +143,21 @@ body {
 	height:75px;
 }
 
+#shop1 {
+	top:-100px;
+}
+
+#shop2 {
+	top:100px;
+}
+
 #shopCoins {
 	width:350px;
 	height:100px;
     margin: auto;
     left: 0;
     right: 0;
+	top:10%;
 }
 
 #shopClose {
@@ -161,6 +167,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
+	top:300px;
 }
 
 #shopClose:hover {
@@ -188,6 +195,20 @@ body {
 #deleteSave:active {
 	width:110px;
 	height:50px;
+}
+
+#notification {
+	top:80px;
+	padding: 10px;
+	background-color:white;
+	color:black;
+	transition:0.7s;
+	text-align:center;
+}
+
+#notification:hover {
+	padding-right:20px;
+	
 }
 
 /*end of buttons*/

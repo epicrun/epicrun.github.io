@@ -8,14 +8,16 @@
 	</head>
 	<body>
 		<div onmousedown="return false">
-			<div id="touchOverlay" onclick="Jump()" style="width:100%;height:100%;z-index:9999;position:fixed;cursor:pointer"></div>
+			<div id="touchOverlay" onmousedown="Jump()" style="width:100%;height:100%;z-index:9999;position:fixed;cursor:pointer"></div>
 			<div id="openGames" class="button" onclick="OpenGames();Pause()" style="opacity:0;transition:3s;z-index:99999999">more games</div>
 			
 			<div id="shopButton" class="button" onclick="OpenShop();Pause()" style="opacity:0;transition:3s;z-index:99999999">open shop</div>
-			<div id="shop1" class="button" onclick="Buy('minion')" style="opacity:0;top:-100px;z-index:99999999;pointer-events:none">minion gif background<br>100 coins</div>
-			<div id="shop2" class="button" onclick="Buy('redplayer')" style="opacity:0;top:100px;z-index:99999999;pointer-events:none">red player<br>25 coins</div>
-			<div id="shopCoins" class="button"onclick="Buy('redplayer')" style="opacity:0;top:150px;z-index:99999999;pointer-events:none"><span>coins<br><span id="shopCoinsText" style="font-size:40px">0</span></span></div>
-			<div id="shopClose" class="button" onclick="OpenShop();Pause()" style="opacity:0;top:300px;z-index:99999999;pointer-events:none">close</div>
+			<div id="shop1" class="button" onclick="Buy('minion')" style="opacity:0;z-index:99999999;pointer-events:none">minion gif background<br>100 coins</div>
+			<div id="shop2" class="button" onclick="Buy('redplayer')" style="opacity:0;z-index:99999999;pointer-events:none">red player<br>25 coins</div>
+			<div id="shopCoins" class="button"onclick="Buy('redplayer')" style="opacity:0;z-index:99999999;pointer-events:none"><span>coins<br><span id="shopCoinsText" style="font-size:40px">0</span></span></div>
+			<div id="shopClose" class="button" onclick="OpenShop();Pause()" style="opacity:0;z-index:99999998;pointer-events:none">close</div>
+			
+			<div id="notification" class="button" onclick="OpenShop();Pause()" style="opacity:0;z-index:99999998;right:141px;">new</div>
 			
 			<div id="deleteSave" class="button" onclick="DeleteSave()" style="opacity:1;z-index:99999999;font-size:15px">delete save</div>
 			
